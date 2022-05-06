@@ -1,0 +1,11 @@
+# Build directory
+dist
+
+# Logs
+logs
+
+# Minified files
+**/*{.,-}min.js
+
+# NPM files
+package.json

@@ -5,10 +5,9 @@ import bodyParser from 'body-parser';
 import logger, { logStream } from './utils/logger';
 import compression from 'compression';
 
-import { publicRouter} from './routes'
+import { publicRouter } from './routes';
 
 import config from './config';
-
 
 const app = express();
 
@@ -23,24 +22,25 @@ app.locals.version = config.app.version;
 
 app.use(helmet());
 app.use(compression());
-app.use(morgan('tiny', { stream: logStream }))
-app.use(bodyParser.json())
+app.use(morgan('tiny', { stream: logStream }));
+app.use(bodyParser.json());
 
 process.send = process.send || function () {};
 
 // Public routes
 app.use('/api/v1', publicRouter);
 
-
 app.listen(app.get('port'), app.get('host'), () => {
-  logger.info(`Server started at http://${app.get('host')}:${app.get('port')}/api/v1`);
+  logger.info(
+    `Server started at http://${app.get('host')}:${app.get('port')}/api/v1`
+  );
 });
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   logger.error('Unhandled rejection', err);
 });
 
-process.on('uncaughtException', (err) => {
+process.on('uncaughtException', err => {
   logger.error('Uncaught exception', err);
 });
 

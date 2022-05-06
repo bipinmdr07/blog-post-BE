@@ -11,8 +11,8 @@ export async function login(req, res, next) {
   const loginPayload = req.body;
 
   try {
-    res.status(HttpStatus.OK).json({ loginPayload })
-  } catch(err) {
-    next(err)
+    res.status(HttpStatus.OK).json({ loginPayload });
+  } catch (err) {
+    next(err);
   }
 }
