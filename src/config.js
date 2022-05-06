@@ -8,6 +8,11 @@ const config = {
     port: process.env.APP_PORT || '4000',
     host: process.env.APP_HOST || '0.0.0.0',
   },
+  githubOauth: {
+    clientId: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    oauthURL: process.env.GITHUB_OAUTH_URL,
+  },
 };
 
 export default config;
