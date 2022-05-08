@@ -9,4 +9,6 @@ const router = Router();
  */
 router.post('/login', authController.login);
 
+router.get('/github/callback', authController.oauthAuthentication);
+
 export default router;
