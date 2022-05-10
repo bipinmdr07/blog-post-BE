@@ -13,6 +13,15 @@ const config = {
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     oauthURL: process.env.GITHUB_OAUTH_URL,
   },
+  aws: {
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  },
+  dynamoDB: {
+    region: process.env.AWS_REGION,
+    endpoint: process.env.DYNAMO_DB_ENDPOINT,
+  },
 };
 
 export default config;
