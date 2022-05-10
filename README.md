@@ -36,6 +36,12 @@ yarn migration:create table_name
 yarn migration:run table_name
 ```
 
+3. To run all the migration at once run.
+
+``` sh
+yarn migration:runAll
+```
+
 ### Running in Development Environment
 1. Normal method
 

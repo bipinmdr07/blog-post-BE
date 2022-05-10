@@ -8,7 +8,8 @@
     "build": "rimraf dist && babel src --copy-files --out-dir dist --source-maps",
     "start:dev": "nodemon --watch .env --watch src --exec babel-node src --source-maps",
     "migration:create": "babel-node ./migration/createMigration.js",
-    "migration:run": "babel-node ./migration/runMigration.js"
+    "migration:run": "babel-node ./migration/runMigration.js",
+    "migration:runAll": "babel-node ./migration/runAllMigration.js"
   },
   "author": "",
   "license": "ISC",
