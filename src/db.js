@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import path from 'path';
 import AWS from 'aws-sdk';
 import dm from 'dynamodb-migrations';
