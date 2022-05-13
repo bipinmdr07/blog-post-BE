@@ -1,3 +1,8 @@
 import dm from '../src/db';
 
-dm.executeAll();
+const tableOptions = {
+  prefix: '',
+  suffix: '',
+};
+
+dm.executeAll(tableOptions);
