@@ -1,0 +1,53 @@
+#+TITLE: Blog post
+
+* Blog Post
+API service for Blog post fe application.
+
+* Prerequisite
++ node
++ docker
++ docker-compose
+
+* Setting up Environment
+1. Install al the application dependencies by running.
+  #+begin_src shell
+yarn
+  #+end_src
+
+2. To run the dynamodb from docker-compose file run.
+  #+begin_src shell
+docker-compose up dynamodb
+  #+end_src
+
+* Creating and running migrations
+1. To create the migration template for table with name `table_name` run.
+  #+begin_src shell
+yarn migration:create table_name
+  #+end_src
+
+2. To run the migration for table with name `table_name` run.
+  #+begin_src shell
+yarn migration:run table_name
+  #+end_src
+
+3. To run all the migration at once run.
+  #+begin_src shell
+yarn migration:runAll
+  #+end_src
+
+* Running App in development environment.
+1. Normal method
+  #+begin_src shell
+yarn start:dev
+  #+end_src
+
+2. Docker method
+  #+begin_src shell
+docker-componse up blog-post
+  #+end_src
+
+
+* Building the application
+  #+begin_src shell
+yarn build
+  #+end_src
