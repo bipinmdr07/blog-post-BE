@@ -8,6 +8,7 @@ import logger, { logStream } from './utils/logger';
 import compression from 'compression';
 import json from './middlewares/json';
 import cors from './middlewares/cors';
+import * as errorHandler from './middlewares/errorHandler';
 
 import { publicRouter } from './routes';
 
@@ -29,12 +30,16 @@ app.use(helmet());
 app.use(compression());
 app.use(morgan('tiny', { stream: logStream }));
 app.use(bodyParser.json());
+app.use(errorHandler.bodyParser);
 app.use(json);
 
 process.send = process.send || function () {};
 
 // Public routes
 app.use('/api/v1', publicRouter);
+
+app.use(errorHandler.genericErrorHandler);
+app.use(errorHandler.methodNotAllowed);
 
 app.listen(app.get('port'), app.get('host'), () => {
   logger.info(
