@@ -13,6 +13,9 @@ const config = {
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     oauthURL: process.env.GITHUB_OAUTH_URL,
   },
+  fe: {
+    baseUrl: process.env.FE_BASE_URL,
+  },
   aws: {
     region: process.env.AWS_REGION,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
