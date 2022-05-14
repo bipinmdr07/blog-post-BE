@@ -6,6 +6,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import logger, { logStream } from './utils/logger';
 import compression from 'compression';
+import json from './middlewares/json';
+import cors from './middlewares/cors';
 
 import { publicRouter } from './routes';
 
@@ -22,10 +24,12 @@ app.set('host', APP_HOST);
 app.locals.title = config.app.name;
 app.locals.version = config.app.version;
 
+app.use(cors);
 app.use(helmet());
 app.use(compression());
 app.use(morgan('tiny', { stream: logStream }));
 app.use(bodyParser.json());
+app.use(json);
 
 process.send = process.send || function () {};
 
