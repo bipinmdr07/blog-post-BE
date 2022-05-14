@@ -19,6 +19,7 @@ const config = {
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
   dynamoDB: {
+    tableName: process.env.TABLE_NAME,
     region: process.env.AWS_REGION,
     endpoint: process.env.DYNAMO_DB_ENDPOINT,
   },

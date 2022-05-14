@@ -21,6 +21,7 @@ npm-debug.log*
 /build
 
 # misc
+/dynamodb-data
 .DS_Store
 .env.local
 .env.development.local
