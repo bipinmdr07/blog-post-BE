@@ -1,3 +1,4 @@
+import TokenError from '../errors/token';
 import * as jwtUtils from './jwt';
 
 export function extractTokenFromHeaders(headers = {}) {
