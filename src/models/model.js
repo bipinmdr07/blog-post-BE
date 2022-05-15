@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { docClient } from '../db';
 
 export class Model {
@@ -5,7 +6,19 @@ export class Model {
     this.tableName = tableName;
   }
 
+  scan() {
+    return docClient
+      .scan({
+        TableName: this.tableName,
+      })
+      .promise();
+  }
+
   fetch(query = {}) {
+    if (isEmpty(query)) {
+      return this.scan();
+    }
+
     return docClient
       .query({
         TableName: this.tableName,
