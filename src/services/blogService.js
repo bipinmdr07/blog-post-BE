@@ -1,6 +1,8 @@
 import { docClient } from '../db';
 import Blog from '../models/blog';
 
+import config from './../config';
+
 export const addBlog = async params => {
   const blog = new Blog(params);
 
