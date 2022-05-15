@@ -6,12 +6,16 @@ class Blog extends Model {
     blogId = ulid(),
     title,
     content,
+    userId,
     createdAt = new Date().getTime(),
     updatedAt = new Date().getTime(),
   }) {
+    super();
+
     this.blogId = blogId;
     this.title = title;
     this.content = content;
+    this.userId = userId;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -42,6 +46,7 @@ class Blog extends Model {
       blogId: this.blogId,
       title: this.title,
       content: this.content,
+      userId: this.userId,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
     };
