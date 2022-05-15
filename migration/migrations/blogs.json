@@ -1,0 +1,93 @@
+{
+  "Table": {
+    "TableName": "blogs",
+    "KeySchema": [
+      {
+        "AttributeName": "blogId",
+        "KeyType": "HASH"
+      }
+    ],
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "blogId",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "createdAt",
+        "AttributeType": "N"
+      },
+      {
+        "AttributeName": "updatedAt",
+        "AttributeType": "N"
+      },
+      {
+        "AttributeName": "userId",
+        "AttributeType": "S"
+      }
+    ],
+    "LocalSecondaryIndexes": [],
+    "GlobalSecondaryIndexes": [
+      {
+        "IndexName": "global_userId_index",
+        "KeySchema": [
+          {
+            "AttributeName": "userId",
+            "KeyType": "HASH"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        }
+      },
+      {
+        "IndexName": "global_createdAt_index",
+        "KeySchema": [
+          {
+            "AttributeName": "blogId",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "createdAt",
+            "KeyType": "RANGE"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        }
+      },
+      {
+        "IndexName": "global_updatedAt_index",
+        "KeySchema": [
+          {
+            "AttributeName": "blogId",
+            "KeyType": "HASH"
+          },
+          {
+            "AttributeName": "updatedAt",
+            "KeyType": "RANGE"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "ALL"
+        },
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        }
+      }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 1,
+      "WriteCapacityUnits": 1
+    }
+  },
+  "Seeds": []
+}
