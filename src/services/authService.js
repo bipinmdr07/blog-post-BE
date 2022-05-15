@@ -1,17 +1,41 @@
 import * as jwt from '../utils/jwt';
+import * as userServices from './userService';
 
-export function loginForOauthUser(user) {
-  const payload = {
-    userId: user.userId,
-    email: user.email,
-    username: user.username,
-    name: user.name,
-    avatarUrl: user.avatarUrl,
+export async function loginForOauthUser(userData) {
+  const userPayload = {
+    name: userData.name,
+    email: userData.email,
+    username: userData.login,
+    avatarUrl: userData.avatar_url,
   };
 
-  const accessToken = jwt.createAccessToken(payload);
+  let user = {};
 
-  console.log({ accessToken });
+  const { Items: items, Count: count } = await userServices.queryUserByEmail(
+    userData.email
+  );
+
+  if (!count) {
+    const { Item: item } = await userServices.createUser(userPayload);
+
+    user = item;
+  } else {
+    user = items[0];
+  }
+
+  // const user = await userServices.createUser({
+  //   ...userPayload,
+  // });
+  //
+  const tokenPayload = {
+    userId: user.userId,
+    email: user.email,
+    name: user.name,
+    avatarUrl: user.avatarUrl,
+    username: user.username,
+  };
+
+  const accessToken = jwt.createAccessToken(tokenPayload);
 
   return {
     accessToken,

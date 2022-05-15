@@ -2,7 +2,6 @@ import HttpStatus from 'http-status-codes';
 
 import * as githubService from '../services/githubService';
 import * as authService from '../services/authService';
-import * as userServices from '../services/userService';
 
 import config from '../config';
 
@@ -37,13 +36,7 @@ export async function oauthAuthentication(req, res, next) {
     const token = await githubService.getAccessToken(code);
     const userData = await githubService.getUserInfo(token);
 
-    const user = await userServices.createUser({
-      ...userData,
-      username: userData.login,
-      avatarUrl: userData.avatar_url,
-    });
-
-    const { accessToken } = authService.loginForOauthUser(user);
+    const { accessToken } = await authService.loginForOauthUser(userData);
 
     res.redirect(`${config.fe.baseUrl}/auth/login?access_token=${accessToken}`);
   } catch (err) {

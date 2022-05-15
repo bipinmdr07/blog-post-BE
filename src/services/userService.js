@@ -1,22 +1,23 @@
-import config from '../config';
-import { docClient } from '../db';
 import User from '../models/user';
 
 export const createUser = async params => {
-  const user = new User(params);
+  const result = await User.create(params);
 
-  try {
-    await docClient
-      .put({
-        TableName: config.dynamoDB.tableName,
-        Item: user.toItem(),
-        ConditionExpression: 'attribute_not_exists(email)',
-      })
-      .promise();
+  return result;
+};
 
-    return user;
-  } catch (error) {
-    console.log({ error });
-    throw error;
-  }
+export const queryUser = async params => {
+  const result = await User.fetch(params);
+
+  return result;
+};
+
+export const queryUserByEmail = async email => {
+  return await queryUser({
+    IndexName: 'email_index',
+    KeyConditionExpression: 'email = :email',
+    ExpressionAttributeValues: {
+      ':email': email,
+    },
+  });
 };
