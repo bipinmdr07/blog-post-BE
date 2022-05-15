@@ -11,9 +11,7 @@ export async function loginForOauthUser(userData) {
 
   let user = {};
 
-  const { Items: items, Count: count } = await userServices.queryUserByEmail(
-    userData.email
-  );
+  const { Items: items, Count: count } = await userServices.queryUsers();
 
   if (!count) {
     const { Item: item } = await userServices.createUser(userPayload);
@@ -23,10 +21,6 @@ export async function loginForOauthUser(userData) {
     user = items[0];
   }
 
-  // const user = await userServices.createUser({
-  //   ...userPayload,
-  // });
-  //
   const tokenPayload = {
     userId: user.userId,
     email: user.email,

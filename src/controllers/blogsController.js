@@ -13,9 +13,19 @@ export async function addBlog(req, res, next) {
   blog = { ...blog, userId: currentUser.userId };
 
   try {
-    const data = await blogService.addBlog(blog);
+    const { Item: item } = await blogService.createBlog(blog);
 
-    res.status(HttpStatus.CREATED).json({ data });
+    res.status(HttpStatus.CREATED).json({ data: item });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getBlogs(req, res, next) {
+  try {
+    const { Items: items } = await blogService.fetchBlogs();
+
+    res.status(HttpStatus.OK).json({ data: items });
   } catch (err) {
     next(err);
   }

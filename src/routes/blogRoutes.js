@@ -6,4 +6,6 @@ const router = Router();
 
 router.post('/', blogsController.addBlog);
 
+router.get('/', blogsController.getBlogs);
+
 export default router;
