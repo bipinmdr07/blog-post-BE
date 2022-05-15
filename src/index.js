@@ -10,9 +10,10 @@ import json from './middlewares/json';
 import cors from './middlewares/cors';
 import * as errorHandler from './middlewares/errorHandler';
 
-import { publicRouter } from './routes';
+import { privateRouter, publicRouter } from './routes';
 
 import config from './config';
+import { authenticateUser } from './middlewares/auth';
 
 const app = express();
 
@@ -37,6 +38,10 @@ process.send = process.send || function () {};
 
 // Public routes
 app.use('/api/v1', publicRouter);
+
+// Private routes
+app.use(authenticateUser);
+app.use('/api/v1', privateRouter);
 
 app.use(errorHandler.genericErrorHandler);
 app.use(errorHandler.methodNotAllowed);

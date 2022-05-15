@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import authRoutes from './routes/authRoutes';
+import blogRoutes from './routes/blogRoutes';
 
 const publicRouter = Router();
 
@@ -13,4 +14,8 @@ publicRouter.get('/', (req, res) => {
 
 publicRouter.use('/auth', authRoutes);
 
-export { publicRouter };
+const privateRouter = Router();
+
+privateRouter.use('/blogs', blogRoutes);
+
+export { publicRouter, privateRouter };
