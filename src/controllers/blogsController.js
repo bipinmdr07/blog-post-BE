@@ -43,3 +43,15 @@ export async function updateBlog(req, res, next) {
     next(err);
   }
 }
+
+export async function deleteBlog(req, res, next) {
+  const { blogId } = req.params;
+
+  try {
+    const item = await blogService.deleteBlog(blogId);
+
+    res.status(HttpStatus.OK).json(item);
+  } catch (err) {
+    next(err);
+  }
+}

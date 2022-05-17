@@ -77,6 +77,17 @@ export class Model {
       .promise();
   }
 
+  delete(key) {
+    return docClient
+      .delete({
+        TableName: this.tableName,
+        Key: {
+          ...key,
+        },
+      })
+      .promise();
+  }
+
   keys() {
     return {
       PK: this.pk(),

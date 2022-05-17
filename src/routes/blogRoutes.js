@@ -11,4 +11,6 @@ router.get('/', blogsController.getBlogs);
 
 privateRouter.put('/:blogId', blogsController.updateBlog);
 
+privateRouter.delete('/:blogId', blogsController.deleteBlog);
+
 // export default router;

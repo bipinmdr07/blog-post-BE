@@ -16,3 +16,9 @@ export const updateBlog = async (blogId, payload) => {
 
   return response;
 };
+
+export const deleteBlog = async blogId => {
+  await Blog.delete({ blogId });
+
+  return { blogId };
+};
