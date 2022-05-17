@@ -51,6 +51,32 @@ export class Model {
       .promise();
   }
 
+  update(key, params) {
+    const { updatedAt: _, ...rest } = params;
+    const paramKeys = Object.keys(rest);
+
+    return docClient
+      .update({
+        TableName: this.tableName,
+        Key: {
+          ...key,
+        },
+        ReturnValues: 'ALL_NEW',
+        UpdateExpression: `SET ${paramKeys
+          .map((_, index) => `#field${index} = :value${index}`)
+          .join(', ')}, #updatedAt = :updatedAt`,
+        ExpressionAttributeNames: paramKeys.reduce(
+          (acc, key, index) => ({ ...acc, [`#field${index}`]: key }),
+          { '#updatedAt': 'updatedAt' }
+        ),
+        ExpressionAttributeValues: paramKeys.reduce(
+          (acc, key, index) => ({ ...acc, [`:value${index}`]: params[key] }),
+          { ':updatedAt': new Date().getTime() }
+        ),
+      })
+      .promise();
+  }
+
   keys() {
     return {
       PK: this.pk(),

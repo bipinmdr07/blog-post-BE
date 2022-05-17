@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import authRoutes from './routes/authRoutes';
 import {
-  // privateRouter as blogPrivateRouter,
+  privateRouter as blogPrivateRouter,
   router as blogPublicRouter,
 } from './routes/blogRoutes';
 
@@ -19,5 +19,6 @@ publicRouter.use('/auth', authRoutes);
 publicRouter.use('/blogs', blogPublicRouter);
 
 const privateRouter = Router();
+privateRouter.use('/blogs', blogPrivateRouter);
 
 export { publicRouter, privateRouter };

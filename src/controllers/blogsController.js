@@ -30,3 +30,16 @@ export async function getBlogs(req, res, next) {
     next(err);
   }
 }
+
+export async function updateBlog(req, res, next) {
+  const { blogId } = req.params;
+  const payload = req.body;
+
+  try {
+    const item = await blogService.updateBlog(blogId, payload);
+
+    res.status(HttpStatus.OK).json(item);
+  } catch (err) {
+    next(err);
+  }
+}
