@@ -15,7 +15,7 @@ export async function addBlog(req, res, next) {
   try {
     const { Item: item } = await blogService.createBlog(blog);
 
-    res.status(HttpStatus.CREATED).json({ data: item });
+    res.status(HttpStatus.CREATED).json(item);
   } catch (err) {
     next(err);
   }
@@ -25,7 +25,7 @@ export async function getBlogs(req, res, next) {
   try {
     const { Items: items } = await blogService.fetchBlogs();
 
-    res.status(HttpStatus.OK).json({ data: items });
+    res.status(HttpStatus.OK).json(items);
   } catch (err) {
     next(err);
   }
