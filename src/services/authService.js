@@ -1,3 +1,4 @@
+import { USER } from '../constants/roles';
 import * as jwt from '../utils/jwt';
 import * as userServices from './userService';
 
@@ -7,6 +8,7 @@ export async function loginForOauthUser(userData) {
     email: userData.email,
     username: userData.login,
     avatarUrl: userData.avatar_url,
+    roles: [USER],
   };
 
   let user = {};
@@ -27,6 +29,7 @@ export async function loginForOauthUser(userData) {
     name: user.name,
     avatarUrl: user.avatarUrl,
     username: user.username,
+    roles: user.roles,
   };
 
   const accessToken = jwt.createAccessToken(tokenPayload);
