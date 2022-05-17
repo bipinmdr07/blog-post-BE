@@ -1,5 +1,9 @@
 import Blog from '../models/blog';
 
+export const fetchBlog = async blogId => {
+  return await Blog.fetchByKey({ blogId });
+};
+
 export const createBlog = async params => {
   return await Blog.create(params);
 };
