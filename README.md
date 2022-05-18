@@ -41,6 +41,12 @@ yarn
 docker-compose up dynamodb
 ```
 
+3. To run the redis from docker-compose file run.
+
+```sh
+docker-compose up redis
+```
+
 ### Creating and running migrations
 
 1. To create the migration template for table with name `table_name` run.
