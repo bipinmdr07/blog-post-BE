@@ -23,6 +23,10 @@ API service for Blog post;
 | :---------- | :------------- | :------------- | :---------- | :--- | :---------- |
 |             |                |                |             |      |             |
 
+### Postman collection
+
+[Join Postman collection](https://app.getpostman.com/join-team?invite_code=b1232f0b36445d6215d3e7b43e27a397&target_code=b251e64cb94f4f5630fe62375cd4ca8c)
+
 ### Setting up Environments
 
 1. Install all the application dependencies by running.
