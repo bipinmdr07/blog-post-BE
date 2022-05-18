@@ -7,6 +7,21 @@ API service for Blog post;
 1. node
 2. docker
 3. docker-compose
+4. dynamodb-local (We have docker-compose to rescue)
+
+### Table Structure
+
+#### users
+
+| userId (PK) | createdAt | udpatedAt | roles | name | email (GSI) | username | avatarUrl |
+| :---------- | :-------- | :-------- | :---- | :--- | :---------- | :------- | :-------- |
+|             |           |           |       |      |             |          |           |
+
+#### blogs
+
+| blogId (PK) | createdAt(GSI) | udpatedAt(GSI) | userId(GSI) | name | email (GSI) |
+| :---------- | :------------- | :------------- | :---------- | :--- | :---------- |
+|             |                |                |             |      |             |
 
 ### Setting up Environments
 
@@ -18,45 +33,46 @@ yarn
 
 2. To run the dynamodb from docker-compose file run.
 
-``` sh
+```sh
 docker-compose up dynamodb
 ```
 
-
 ### Creating and running migrations
+
 1. To create the migration template for table with name `table_name` run.
 
-``` sh
+```sh
 yarn migration:create table_name
 ```
 
 2. To run the migration for table with name `table_name` run.
 
-``` sh
+```sh
 yarn migration:run table_name
 ```
 
 3. To run all the migration at once run.
 
-``` sh
+```sh
 yarn migration:runAll
 ```
 
 ### Running in Development Environment
+
 1. Normal method
 
-``` sh
+```sh
 yarn start:dev
 ```
 
 2. Docker Method
 
-``` sh
+```sh
 docker-compose up blog-post
 ```
 
 ### Building the application
 
-``` sh
+```sh
 yarn build
 ```
