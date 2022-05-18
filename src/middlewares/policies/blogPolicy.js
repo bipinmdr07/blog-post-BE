@@ -10,43 +10,57 @@ import { verifyToken } from '../../utils/jwt';
 import { hasPermission } from '../../utils/permission';
 
 export async function createBlog(req, res, next) {
-  const currentUser = verifyToken(extractTokenFromHeaders(req.headers).token);
+  try {
+    const currentUser = verifyToken(extractTokenFromHeaders(req.headers).token);
 
-  if (hasPermission(currentUser, CREATE_BLOG)) {
-    next();
-  } else {
-    next(unauthorized('Not authrorized'));
+    if (hasPermission(currentUser, CREATE_BLOG)) {
+      next();
+    } else {
+      next(unauthorized('Not authrorized'));
+    }
+  } catch (err) {
+    next(err);
   }
 }
 
 export async function updateBlog(req, res, next) {
   const { blogId } = req.params;
-  const currentUser = verifyToken(extractTokenFromHeaders(req.headers).token);
-  const { Item: blog } = await fetchBlog(blogId);
 
-  console.log(hasPermission(currentUser, UPDATE_BLOG));
+  try {
+    const currentUser = verifyToken(extractTokenFromHeaders(req.headers).token);
+    const { Item: blog } = await fetchBlog(blogId);
 
-  if (
-    hasPermission(currentUser, UPDATE_BLOG) &&
-    currentUser.userId === blog.userId
-  ) {
-    next();
-  } else {
-    next(unauthorized('Not authorized'));
+    console.log(hasPermission(currentUser, UPDATE_BLOG));
+
+    if (
+      hasPermission(currentUser, UPDATE_BLOG) &&
+      currentUser.userId === blog.userId
+    ) {
+      next();
+    } else {
+      next(unauthorized('Not authorized'));
+    }
+  } catch (err) {
+    next(err);
   }
 }
 
 export async function deleteBlog(req, res, next) {
   const { blogId } = req.params;
-  const currentUser = verifyToken(extractTokenFromHeaders(req.headers).token);
-  const { Item: blog } = await fetchBlog(blogId);
 
-  if (
-    hasPermission(currentUser, DELETE_BLOG) &&
-    currentUser.userId === blog.userId
-  ) {
-    next();
-  } else {
-    next(unauthorized('Not authorized'));
+  try {
+    const currentUser = verifyToken(extractTokenFromHeaders(req.headers).token);
+    const { Item: blog } = await fetchBlog(blogId);
+
+    if (
+      hasPermission(currentUser, DELETE_BLOG) &&
+      currentUser.userId === blog.userId
+    ) {
+      next();
+    } else {
+      next(unauthorized('Not authorized'));
+    }
+  } catch (err) {
+    next(err);
   }
 }
