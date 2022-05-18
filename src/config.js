@@ -26,6 +26,9 @@ const config = {
     region: process.env.AWS_REGION,
     endpoint: process.env.DYNAMO_DB_ENDPOINT,
   },
+  redis: {
+    port: process.env.REDIS_PORT,
+  },
 };
 
 export default config;
